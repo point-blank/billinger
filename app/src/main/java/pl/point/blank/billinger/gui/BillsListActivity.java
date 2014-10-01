@@ -53,6 +53,7 @@ public class BillsListActivity extends RoboListActivity {
         Intent intent = new Intent(this, BillDetailsActivity.class );
         intent.putExtra("POSITION", position);
         startActivity(intent);
+        overridePendingTransition(0, 0);
 
     }
 

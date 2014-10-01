@@ -1,6 +1,7 @@
 package pl.point.blank.billinger.controller;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import roboguice.inject.ContextSingleton;
  * Created by gko on 2014-09-30.
  */
 
-@ContextSingleton
+@Singleton
 public class BillControl {
     private ArrayList<Bill> listOfBills;
 
