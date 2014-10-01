@@ -7,5 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_add_bill">Add new Bill</string>
     <string name="action_exit">Exit</string>
+    <string name="action_edit_bill">Edit Bill</string>
+    <string name="action_delete_bill">Delete Bill</string>
 
 </resources>

@@ -2,11 +2,15 @@ package pl.point.blank.billinger.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
@@ -23,10 +27,7 @@ import roboguice.activity.RoboListActivity;
 public class BillsListActivity extends RoboListActivity {
     @Inject
     BillControl billController;
-
     private BillsAdapter adapter;
-
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +36,34 @@ public class BillsListActivity extends RoboListActivity {
         adapter = new BillsAdapter(this, billController.getListOfBills());
 
         setListAdapter(adapter);
-        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                return true;
-            }
-        });
-
-
+        this.registerForContextMenu(getListView());
 
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.long_press_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.edit_bill:
+               // editNote(info.id);
+                return true;
+            case R.id.delete_bill:
+               // deleteNote(info.id);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
