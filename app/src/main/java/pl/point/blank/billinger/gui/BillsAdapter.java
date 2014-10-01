@@ -33,6 +33,7 @@ public class BillsAdapter extends ArrayAdapter<Bill> {
             view = vi.inflate(R.layout.bill_row_layout, null);
         }
 
+
         TextView textView = (TextView) view.findViewById(R.id.label);
         textView.setText(listOfBills.get(position).getName());
 

@@ -1,13 +1,17 @@
 package pl.point.blank.billinger.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.inject.Inject;
+
 import java.util.ArrayList;
 
+import pl.point.blank.billinger.controller.BillControl;
 import pl.point.blank.billinger.model.Bill;
 import roboguice.activity.RoboListActivity;
 
@@ -17,23 +21,18 @@ import roboguice.activity.RoboListActivity;
  */
 
 public class BillsListActivity extends RoboListActivity {
-    private ArrayList<Bill> listOfBills;
+    @Inject
+    BillControl billController;
+
     private BillsAdapter adapter;
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listOfBills = new ArrayList<Bill>();
 
 
-        Bill firstBill = new Bill();
-        firstBill.setName("first");
-        Bill secondBill = new Bill();
-        secondBill.setName("second");
-
-        listOfBills.add(firstBill);
-        listOfBills.add(secondBill);
-
-        adapter = new BillsAdapter(this, listOfBills);
+        adapter = new BillsAdapter(this, billController.getBillsForTestPurposes());
 
 
         setListAdapter(adapter);
@@ -52,6 +51,9 @@ public class BillsListActivity extends RoboListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        Intent intent = new Intent(this, BillDetailsActivity.class );
+        intent.putExtra("POSITION", position);
+        startActivity(intent);
 
     }
 
