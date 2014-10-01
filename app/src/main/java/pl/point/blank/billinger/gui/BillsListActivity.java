@@ -3,9 +3,11 @@ package pl.point.blank.billinger.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 
@@ -55,12 +57,21 @@ public class BillsListActivity extends RoboListActivity {
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_add_bill) {
+            Toast.makeText(this,"I wanna rock !!",Toast.LENGTH_LONG).show();
+            return true;
+        }else if (id == R.id.action_exit) {
+            System.exit(0);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        menu.add(0, 1, 1, "Add a Bill");
-        menu.add(0, 2, 2, "About");
-
+        getMenuInflater().inflate(R.menu.bills_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 }

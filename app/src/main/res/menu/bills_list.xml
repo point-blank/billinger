@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pl.point.blank.billinger.gui.BillDetailsActivity" >
+    <item android:id="@+id/action_add_bill"
+        android:title="@string/action_add_bill"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_exit"
+        android:title="@string/action_exit"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+</menu>
