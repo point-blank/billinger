@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 
 import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
+import pl.point.blank.billinger.tools.BillingerExceptionHandler;
 import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboListActivity;
 
@@ -55,6 +56,7 @@ public class BillsListActivity extends RoboListActivity {
         switch (item.getItemId()) {
             case R.id.edit_bill:
                // editNote(info.id);
+                BillingerExceptionHandler.notifyAndLog(this,new Throwable("cos"),"gko");
                 return true;
             case R.id.delete_bill:
                // deleteNote(info.id);
