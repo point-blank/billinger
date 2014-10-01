@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 
 import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
+import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboListActivity;
 
 /**
@@ -69,7 +70,7 @@ public class BillsListActivity extends RoboListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Intent intent = new Intent(this, BillDetailsActivity.class );
-        intent.putExtra("POSITION", position);
+        intent.putExtra(Constraints.INTENT_POSITION, position);
         startActivity(intent);
         overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
 

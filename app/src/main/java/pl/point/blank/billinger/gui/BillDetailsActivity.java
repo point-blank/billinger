@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 
 import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
+import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -28,7 +29,7 @@ public class BillDetailsActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
 
-        int position = intent.getIntExtra("POSITION",0);
+        int position = intent.getIntExtra(Constraints.INTENT_POSITION,0);
         name.setText(billController.getBillFromList(position).getName());
         setTitle(billController.getBillFromList(position).getName());
     }

@@ -4,5 +4,5 @@ package pl.point.blank.billinger.tools;
  * Created by gko on 2014-09-29.
  */
 public class Constraints {
-    //public const final int COSTAM = 1;
+    public static final String INTENT_POSITION = "INTENT_POSITION";
 }
