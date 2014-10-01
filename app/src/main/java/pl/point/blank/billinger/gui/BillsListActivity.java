@@ -30,10 +30,9 @@ public class BillsListActivity extends RoboListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        billController.loadBillsForTestPurposes();
 
-
-        adapter = new BillsAdapter(this, billController.getBillsForTestPurposes());
-
+        adapter = new BillsAdapter(this, billController.getListOfBills());
 
         setListAdapter(adapter);
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

@@ -13,23 +13,36 @@ import roboguice.inject.ContextSingleton;
 
 @ContextSingleton
 public class BillControl {
+    private ArrayList<Bill> listOfBills;
 
-    public void getBillsFromDatabase()
-    {
+    public void loadBillsFromDatabase(){
         // TODO
     }
 
-    public ArrayList<Bill> getBillsForTestPurposes()
-    {
-        ArrayList<Bill> result = new ArrayList<Bill>();
+    public void loadBillsForTestPurposes(){
+        listOfBills = new ArrayList<Bill>();
         Bill firstBill = new Bill();
         firstBill.setName("first");
         Bill secondBill = new Bill();
         secondBill.setName("second");
 
-        result.add(firstBill);
-        result.add(secondBill);
-
-        return result;
+        listOfBills.add(firstBill);
+        listOfBills.add(secondBill);
     }
+
+    public ArrayList<Bill> getListOfBills(){
+        return listOfBills;
+    }
+
+    public Bill getBillFromList(int position){
+        if (listOfBills.get(position) != null){
+            return listOfBills.get(position);
+        }
+        else{
+            //TODO handle throwable
+            return null;
+        }
+    }
+
+
 }

@@ -33,10 +33,8 @@ public class BillDetailsActivity extends RoboActivity {
         Intent intent = getIntent();
 
         int position = intent.getIntExtra("POSITION",0);
-        name.setText(billController.getBillsForTestPurposes().get(position).getName());
-        setTitle(billController.getBillsForTestPurposes().get(position).getName());
-
-
+        name.setText(billController.getBillFromList(position).getName());
+        setTitle(billController.getBillFromList(position).getName());
     }
 
 
