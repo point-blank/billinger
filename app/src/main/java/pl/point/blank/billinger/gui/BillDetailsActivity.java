@@ -1,6 +1,5 @@
 package pl.point.blank.billinger.gui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +8,8 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
-import java.util.ArrayList;
-
 import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
-import pl.point.blank.billinger.model.Bill;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -60,6 +56,6 @@ public class BillDetailsActivity extends RoboActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(0, 0);
+        overridePendingTransition(R.anim.animation_from_left, R.anim.animation_to_right);
     }
 }

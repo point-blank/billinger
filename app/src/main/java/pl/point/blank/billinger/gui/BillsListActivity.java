@@ -9,10 +9,8 @@ import android.widget.ListView;
 
 import com.google.inject.Inject;
 
-import java.util.ArrayList;
-
+import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
-import pl.point.blank.billinger.model.Bill;
 import roboguice.activity.RoboListActivity;
 
 /**
@@ -53,7 +51,7 @@ public class BillsListActivity extends RoboListActivity {
         Intent intent = new Intent(this, BillDetailsActivity.class );
         intent.putExtra("POSITION", position);
         startActivity(intent);
-        overridePendingTransition(0, 0);
+        overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
 
     }
 
