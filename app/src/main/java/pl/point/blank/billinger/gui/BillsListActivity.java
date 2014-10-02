@@ -2,7 +2,6 @@ package pl.point.blank.billinger.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
@@ -33,6 +31,7 @@ public class BillsListActivity extends RoboListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BillingerExceptionHandler.initializeLogger();
         billController.loadBillsForTestPurposes();
 
         adapter = new BillsAdapter(this, billController.getListOfBills());
