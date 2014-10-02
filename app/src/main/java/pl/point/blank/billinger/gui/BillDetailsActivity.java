@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 
 import billinger.blank.point.pl.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
+import pl.point.blank.billinger.tools.BillingerExceptionHandler;
 import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -30,8 +31,12 @@ public class BillDetailsActivity extends RoboActivity {
         Intent intent = getIntent();
 
         int position = intent.getIntExtra(Constraints.INTENT_POSITION,0);
-        name.setText(billController.getBillFromList(position).getName());
-        setTitle(billController.getBillFromList(position).getName());
+        try {
+            name.setText(billController.getBillFromList(position).getName());
+            setTitle(billController.getBillFromList(position).getName());
+        } catch (NullPointerException ex){
+            BillingerExceptionHandler.notifyABoutError(this,ex,"GKO");
+        }
     }
 
 

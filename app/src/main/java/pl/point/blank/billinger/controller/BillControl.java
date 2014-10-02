@@ -40,8 +40,7 @@ public class BillControl {
             return listOfBills.get(position);
         }
         else{
-            //TODO handle throwable
-            return null;
+            throw new NullPointerException("No Bill with given ID found, ID= "+position);
         }
     }
 

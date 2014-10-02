@@ -2,17 +2,11 @@ package pl.point.blank.billinger.tools;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
+import android.util.Log;
 
-import billinger.blank.point.pl.billinger.R;
-import pl.point.blank.billinger.gui.ErrorDialogFragment;
-import roboguice.fragment.RoboDialogFragment;
 
 /**
  * Created by Grzegorz on 10/1/2014.
@@ -20,7 +14,7 @@ import roboguice.fragment.RoboDialogFragment;
 public class BillingerExceptionHandler {
 
 
-    public static void notifyAndLog(Activity context, Throwable th, String tag){
+    public static void notifyABoutError(final Activity context,final Throwable th,final String tag){
 
         FragmentTransaction ft = context.getFragmentManager().beginTransaction();
         Fragment prev = context.getFragmentManager().findFragmentByTag("dialog");
@@ -29,20 +23,26 @@ public class BillingerExceptionHandler {
         }
         ft.addToBackStack(null);
 
-        // Create and show the dialog.
-        FireMissilesDialogFragment newFragment = new FireMissilesDialogFragment();
-
-        newFragment.show(ft, "dialog");
+        new AlertDialog.Builder(context)
+                .setTitle("An Error ?")
+                .setMessage("You have destroyed me ! \nLet the IT guys fix it ?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        logAnError(th,tag);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.e(tag, th.getMessage(),th);
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
-    public ErrorDialogFragment newInstance (String message){
-        ErrorDialogFragment f = new ErrorDialogFragment();
+    public static void logAnError(Throwable th, String tag){
+        Log.e(tag, th.getMessage(),th);
 
-        Bundle args = new Bundle();
-        args.putString(MESSAGE_ARG, message);
-        f.setArguments(args);
-
-        return f;
     }
 }
 

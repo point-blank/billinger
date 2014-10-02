@@ -56,7 +56,7 @@ public class BillsListActivity extends RoboListActivity {
         switch (item.getItemId()) {
             case R.id.edit_bill:
                // editNote(info.id);
-                BillingerExceptionHandler.notifyAndLog(this,new Throwable("cos"),"gko");
+              //  BillingerExceptionHandler.notifyABoutError(this,new Throwable("cos"),"gko");
                 return true;
             case R.id.delete_bill:
                // deleteNote(info.id);
