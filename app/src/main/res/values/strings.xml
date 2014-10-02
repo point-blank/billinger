@@ -9,5 +9,6 @@
     <string name="action_exit">Exit</string>
     <string name="action_edit_bill">Edit Bill</string>
     <string name="action_delete_bill">Delete Bill</string>
+    <string name="action_save">Save</string>
 
 </resources>

@@ -1,5 +1,7 @@
 package pl.point.blank.billinger.controller;
 
+import android.util.Log;
+
 import com.google.inject.Singleton;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import pl.point.blank.billinger.model.Bill;
 
 @Singleton
 public class BillControl {
-    private ArrayList<Bill> listOfBills;
+    private static ArrayList<Bill> listOfBills;
 
     public void loadBillsFromDatabase(){
         // TODO
@@ -40,6 +42,10 @@ public class BillControl {
         else{
             throw new NullPointerException("No Bill with given ID found, ID= "+position);
         }
+    }
+
+    public static void addBill(Bill newBill){
+        listOfBills.add(newBill);
     }
 
 

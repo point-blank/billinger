@@ -42,6 +42,12 @@ public class BillsListActivity extends RoboListActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -83,6 +89,12 @@ public class BillsListActivity extends RoboListActivity {
         int id = item.getItemId();
         if (id == R.id.action_add_bill) {
             Toast.makeText(this,"I wanna rock !!",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, BillDetailsActivity.class );
+            intent.putExtra(Constraints.INTENT_POSITION, -1);
+            intent.putExtra(Constraints.INTENT_EDITABLE, true);
+            intent.putExtra(Constraints.INTENT_NEW_BILL, true);
+            startActivity(intent);
+            overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
             return true;
         }else if (id == R.id.action_exit) {
             System.exit(0);
