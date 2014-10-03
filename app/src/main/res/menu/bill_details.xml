@@ -1,8 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="pl.point.blank.billinger.gui.BillDetailsActivity" >
-    <item android:id="@+id/action_save"
-        android:title="@string/action_save"
+    <item android:id="@+id/action_update"
+        android:title="@string/action_update"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:visible="false"/>
+    <item android:id="@+id/action_create"
+        android:title="@string/action_create"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:visible="false"/>

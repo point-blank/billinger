@@ -48,5 +48,12 @@ public class BillControl {
         listOfBills.add(newBill);
     }
 
+    public void deleteBill(Bill billToDelete){
+        if (listOfBills.contains(billToDelete)){
+            listOfBills.remove(billToDelete);
+            //TODO check if this works ... otherwise use whole iteration process / getId method
+        }
+    }
+
 
 }

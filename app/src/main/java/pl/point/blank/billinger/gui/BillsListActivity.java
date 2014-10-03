@@ -1,7 +1,10 @@
 package pl.point.blank.billinger.gui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,14 +60,26 @@ public class BillsListActivity extends RoboListActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.edit_bill:
-               // editNote(info.id);
-              //  BillingerExceptionHandler.notifyABoutError(this,new Throwable("cos"),"gko");
+                startViewOrEditDetailsActivity(info.position,true,false);
                 return true;
             case R.id.delete_bill:
-               // deleteNote(info.id);
+                new AlertDialog.Builder(this)
+                        .setTitle("Seriously ?")
+                        .setMessage("Confirm deletion")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                               billController.deleteBill(billController.getBillFromList(info.position));
+                               adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {                        }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -76,11 +91,7 @@ public class BillsListActivity extends RoboListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(this, BillDetailsActivity.class );
-        intent.putExtra(Constraints.INTENT_POSITION, position);
-        startActivity(intent);
-        overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
-
+        startViewOrEditDetailsActivity(position,false,false);
     }
 
 
@@ -88,13 +99,7 @@ public class BillsListActivity extends RoboListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add_bill) {
-            Toast.makeText(this,"I wanna rock !!",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, BillDetailsActivity.class );
-            intent.putExtra(Constraints.INTENT_POSITION, -1);
-            intent.putExtra(Constraints.INTENT_EDITABLE, true);
-            intent.putExtra(Constraints.INTENT_NEW_BILL, true);
-            startActivity(intent);
-            overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
+            startViewOrEditDetailsActivity(-1,true,true);
             return true;
         }else if (id == R.id.action_exit) {
             System.exit(0);
@@ -105,5 +110,14 @@ public class BillsListActivity extends RoboListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bills_list, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void startViewOrEditDetailsActivity(int position, boolean isEditable, boolean isNewBill){
+        Intent intent = new Intent(this, BillDetailsActivity.class );
+        intent.putExtra(Constraints.INTENT_POSITION, position);
+        intent.putExtra(Constraints.INTENT_EDITABLE, isEditable);
+        intent.putExtra(Constraints.INTENT_NEW_BILL, isNewBill);
+        startActivity(intent);
+        overridePendingTransition(R.anim.animation_from_right, R.anim.animation_to_left);
     }
 }

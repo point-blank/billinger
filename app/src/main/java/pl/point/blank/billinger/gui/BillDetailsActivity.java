@@ -20,6 +20,7 @@ import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_bill_details)
 public class BillDetailsActivity extends RoboActivity {
+    private static final String TAG = BillDetailsActivity.class.getSimpleName();
 
     @Inject
     BillControl billController;
@@ -57,7 +58,7 @@ public class BillDetailsActivity extends RoboActivity {
             setTitle(billController.getBillFromList(position).getName());
 
         } catch (NullPointerException ex){
-            BillingerExceptionHandler.notifyABoutError(this,ex,"GKO");
+            BillingerExceptionHandler.notifyABoutError(this,ex,TAG);
         }
     }
 
@@ -72,9 +73,14 @@ public class BillDetailsActivity extends RoboActivity {
         getMenuInflater().inflate(R.menu.bill_details, menu);
 
         //TODO ugly piece of code ... need to be rewritten
-        if (isNewObject){
-            for (int i=0;i<menu.size();i++){
-                if (menu.getItem(i).getItemId() == R.id.action_save){
+        for (int i=0;i<menu.size();i++){
+            if (menu.getItem(i).getItemId() == R.id.action_create) {
+                if (isNewObject) {
+                    menu.getItem(i).setVisible(true);
+                }
+            }
+            else if (menu.getItem(i).getItemId() == R.id.action_update){
+                if (isEditable) {
                     menu.getItem(i).setVisible(true);
                 }
             }
@@ -88,13 +94,14 @@ public class BillDetailsActivity extends RoboActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_save) {
+        if (id == R.id.action_add_bill) {
             Bill testNewBill = new Bill();
             testNewBill.setName(name.getText().toString());
             BillControl.addBill(testNewBill);
             onBackPressed();
             return true;
         }
+        // TODO add update functionality with closing / onbackpressed
         return super.onOptionsItemSelected(item);
     }
 
