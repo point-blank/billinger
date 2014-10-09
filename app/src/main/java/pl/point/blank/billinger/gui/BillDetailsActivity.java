@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
-import billinger.blank.point.pl.billinger.R;
+import pl.point.blank.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
 import pl.point.blank.billinger.model.Bill;
 import pl.point.blank.billinger.tools.BillingerExceptionHandler;

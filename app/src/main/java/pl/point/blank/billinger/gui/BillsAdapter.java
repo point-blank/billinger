@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import billinger.blank.point.pl.billinger.R;
+import pl.point.blank.billinger.R;
 import pl.point.blank.billinger.model.Bill;
 
 /**
