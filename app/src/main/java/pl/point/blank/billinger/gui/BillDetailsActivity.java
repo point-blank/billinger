@@ -9,10 +9,11 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
+import org.acra.ACRA;
+
 import pl.point.blank.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
 import pl.point.blank.billinger.model.Bill;
-import pl.point.blank.billinger.tools.BillingerExceptionHandler;
 import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -58,7 +59,7 @@ public class BillDetailsActivity extends RoboActivity {
             setTitle(billController.getBillFromList(position).getName());
 
         } catch (NullPointerException ex){
-            BillingerExceptionHandler.notifyABoutError(this,ex,TAG);
+            ACRA.getErrorReporter().handleException(ex);
         }
     }
 

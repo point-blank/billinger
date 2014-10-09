@@ -16,7 +16,6 @@ import com.google.inject.Inject;
 
 import pl.point.blank.billinger.R;
 import pl.point.blank.billinger.controller.BillControl;
-import pl.point.blank.billinger.tools.BillingerExceptionHandler;
 import pl.point.blank.billinger.tools.Constraints;
 import roboguice.activity.RoboListActivity;
 
@@ -32,7 +31,6 @@ public class BillsListActivity extends RoboListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BillingerExceptionHandler.initializeLogger();
         billController.loadBillsForTestPurposes();
 
         adapter = new BillsAdapter(this, billController.getListOfBills());
@@ -100,7 +98,8 @@ public class BillsListActivity extends RoboListActivity {
             startViewOrEditDetailsActivity(-1,true,true);
             return true;
         }else if (id == R.id.action_exit) {
-            System.exit(0);
+            throw new NullPointerException("DOOM ... DOOOOOOM!!!");
+            //System.exit(0);
         }
         return super.onOptionsItemSelected(item);
     }
